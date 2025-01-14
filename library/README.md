@@ -1,2 +1,1 @@
-## Aplikasi perpustakaan sederhana menggunakan database
-# anjay
+# Aplikasi Perpustakaan Sederhana Menggunakan Database
