@@ -1,3 +1,3 @@
-## Penjelasan Program pada Latihan_1
+## Penjelasan Program Latihan_1
 
-*### Penggunaan Variabel 
+### Penggunaan Variabel 
