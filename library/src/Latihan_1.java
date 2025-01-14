@@ -16,7 +16,6 @@ public class Latihan_1 {
             System.out.print("Masukkan Nim: ");
             String nim = scan.nextLine();
 
-            // jika nim tidak 15 karakter
             if (nim.length() != 15) {
                 do {
                     System.out.println("Nim harus 15 karakter panjangnya ");
