@@ -1,3 +1,4 @@
+package Latihan_1;
 import java.util.Scanner;
 
 public class Latihan_1 {
