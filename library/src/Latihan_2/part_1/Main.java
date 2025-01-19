@@ -1,4 +1,4 @@
-package Latihan_2;
+package Latihan_2.part_1;
 
 import java.util.ArrayList;
 import java.util.Scanner;
