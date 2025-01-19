@@ -1,1 +1,1 @@
-# Aplikasi Perpustakaan dengan menggunakan database dan Email API
+# Aplikasi Perpustakaan dengan menggunakan database dan Email API (Java GUI)
