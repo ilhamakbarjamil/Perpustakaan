@@ -1,7 +1,19 @@
 package Latihan_2.part_2;
 
 public class student {
-    String nama, fakultas, programStudi, nim;
+    private String nama, fakultas, programStudi, nim;
+
+    public String getNama() {
+        return nama;
+    }
+
+    public String getFakultas() {
+        return fakultas;
+    }
+
+    public String getProgramStudi() {
+        return programStudi;
+    }
 
     public student(String nama, String fakultas, String programStudi, String nim) {
         this.nama = nama;
@@ -18,13 +30,7 @@ public class student {
         return "Nama: "+nama+"\nNim: "+nim+"\nFakultas: "+fakultas+"\nJurusan: "+programStudi+"\n";
     }
 
-    public void logout(){
-        System.exit(0);
+    public void logout(student mahasiswa){
+        System.out.println("Nama: "+mahasiswa.getNama()+", Nim: "+mahasiswa.getNim()+", Fakultas: "+mahasiswa.getFakultas()+"\nTerimakasih");
     }
-
-    public void displayBook(){
-
-    }
-
-
 }

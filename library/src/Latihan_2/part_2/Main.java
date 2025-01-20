@@ -1,5 +1,6 @@
 package Latihan_2.part_2;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -9,6 +10,7 @@ public class Main {
     }
 
     Scanner scan = new Scanner(System.in);
+    static ArrayList<String> databuku = new ArrayList<>();
 
     public void menu() {
 
@@ -51,7 +53,6 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Program keluar");
                     System.exit(0);
 
                 default:
@@ -79,6 +80,7 @@ public class Main {
                 case 2:
                     add.displayStudent();
                     break;
+                
                 case 3:
                     System.out.println("terimakasih");
                     menu();
@@ -91,8 +93,24 @@ public class Main {
         }
     }
 
-    public void menuStudent() {
+    public void menuStudent(student mahasiswa) {
+        while (true) {
+            System.out.println("Login berhasil");
+            System.out.println("3. Keluar");
+            System.out.print("Pilih (1-3): ");
+            int jawab = scan.nextInt();
+            scan.nextLine();
 
+            switch (jawab) {
+                case 3:
+                    mahasiswa.logout(mahasiswa);
+                    menu();
+                    break;
+            
+                default:
+                    break;
+            }
+        }
     }
 
     public void checknim() {
@@ -109,7 +127,7 @@ public class Main {
             for (student mahasiswa : admin.dataMahasiswa) {
                 if (mahasiswa.getNim().equals(nim)) {
                     System.out.println("Nim ditemukan");
-                    menuStudent();
+                    menuStudent(mahasiswa);
                     found = true;
                     break;
                 }

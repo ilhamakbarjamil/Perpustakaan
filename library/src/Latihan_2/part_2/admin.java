@@ -11,13 +11,13 @@ public class admin {
 
     public void addStudent(){
         while (true) {
-            System.out.println("Masukkan nama mahasiswa: ");
+            System.out.print("Masukkan nama mahasiswa: ");
             String nama = scan.nextLine();
-            System.out.println("Masukkakan nim mahasiswa: ");
+            System.out.print("Masukkakan nim mahasiswa: ");
             String nim = scan.nextLine();
-            System.out.println("Masukkan fakultas mahasiswa: ");
+            System.out.print("Masukkan fakultas mahasiswa: ");
             String fakultas = scan.nextLine();
-            System.out.println("Masukkan Program studi mahasiswa: ");
+            System.out.print("Masukkan Program studi mahasiswa: ");
             String jurusan = scan.nextLine();
 
             student mahasiswa = new student(nama, fakultas, jurusan, nim);
