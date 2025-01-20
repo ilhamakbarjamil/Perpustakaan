@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class admin {
     String username = "admin";
     String password = "admin123";
-    ArrayList<student> dataMahasiswa = new ArrayList<>();
+    static ArrayList<student> dataMahasiswa = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
 
     public void addStudent(){
@@ -22,11 +22,12 @@ public class admin {
 
             student mahasiswa = new student(nama, fakultas, jurusan, nim);
             dataMahasiswa.add(mahasiswa);
+            break;
         }
     }
 
     public void displayStudent(){
-        System.out.println("daftar mahasiswa");
+        System.out.println("daftar mahasiswa\n");
         if(dataMahasiswa.isEmpty()){
             System.out.println("data sedang kosong");
         }else{

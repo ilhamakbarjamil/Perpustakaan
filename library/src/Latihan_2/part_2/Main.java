@@ -1,14 +1,13 @@
 package Latihan_2.part_2;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
+        Main utama = new Main();
+        utama.menu();
     }
 
-    ArrayList<student> datamahasiswa = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
 
     public void menu() {
@@ -24,11 +23,31 @@ public class Main {
 
             switch (jawab) {
                 case 1:
-                    menuStudent();
+                    checknim();
                     break;
 
                 case 2:
-                    menuAdmin();
+                    admin anjay = new admin();
+                    String username = "";
+                    String password = "";
+                    do {
+                        System.out.print("Masukkan username: ");
+                        username = scan.nextLine();
+
+                        if (anjay.username.equalsIgnoreCase(username)) {
+                            System.out.print("Masukkan password: ");
+                            password = scan.nextLine();
+
+                            if (anjay.password.equalsIgnoreCase(password)) {
+                                menuAdmin();
+                                break;
+                            } else {
+                                System.out.println("Password tidak ditemukan");
+                            }
+                        } else {
+                            System.out.println("username tidak ditemuakan");
+                        }
+                    } while (username != anjay.username || password != anjay.password);
                     break;
 
                 case 3:
@@ -43,7 +62,33 @@ public class Main {
     }
 
     public void menuAdmin() {
+        admin add = new admin();
+        while (true) {
+            System.out.println("=== Menu Admin ===");
+            System.out.println("1. Tambah data mahasiswa");
+            System.out.println("2. Tampilkan data mahasiswa");
+            System.out.println("3. Keluar");
+            System.out.print("Pilih (1-3): ");
+            int jawab = scan.nextInt();
+            scan.nextLine();
 
+            switch (jawab) {
+                case 1:
+                    add.addStudent();
+                    break;
+                case 2:
+                    add.displayStudent();
+                    break;
+                case 3:
+                    System.out.println("terimakasih");
+                    menu();
+                    break;
+
+                default:
+                    System.out.println("Program tidak dikenali");
+                    break;
+            }
+        }
     }
 
     public void menuStudent() {
@@ -53,12 +98,24 @@ public class Main {
     public void checknim() {
 
         while (true) {
-            System.out.print("Masukkan Nim: ");
+            System.out.print("Masukkan Nim (99 to back): ");
             String nim = scan.nextLine();
-            for (student mahasiswa : datamahasiswa) {
-                if (nim.equals(mahasiswa.getNim())) {
+
+            if (nim.equalsIgnoreCase("99")) {
+                menu();
+            }
+
+            boolean found = false;
+            for (student mahasiswa : admin.dataMahasiswa) {
+                if (mahasiswa.getNim().equals(nim)) {
+                    System.out.println("Nim ditemukan");
                     menuStudent();
+                    found = true;
+                    break;
                 }
+            }
+            if(!found){
+                System.out.println("nim tidak ditemukan");
             }
         }
     }
