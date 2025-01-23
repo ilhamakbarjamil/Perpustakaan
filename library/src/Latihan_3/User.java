@@ -9,7 +9,7 @@ public class User {
     
 }
 
-class Student{
+class Student extends User{
     String nama, nim, fakultas, prodi;
 
     public Student(String nama, String nim, String fakultas, String prodi) {
@@ -26,7 +26,7 @@ class Student{
 
 }
 
-class Admin{
+class Admin extends User{
     String username = "admin";
     String password = "admin123";
     Scanner scan = new Scanner(System.in);
