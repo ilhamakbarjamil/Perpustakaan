@@ -1,0 +1,10 @@
+{
+	// Example:
+	"System.out.print": {
+		"prefix": "print",
+		"body": [
+			"System.out.print(\"\");"
+		],
+		"description": "Method mencetak"
+	}
+}
