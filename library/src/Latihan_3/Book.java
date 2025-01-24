@@ -8,13 +8,12 @@ public class Book {
     int stock;
     int durasi;
 
-    public Book(String bookId, String judul, String penulis, String kategori, int stock, int durasi) {
+    public Book(String bookId, String judul, String penulis, String kategori, int stock) {
         BookId = bookId;
         this.judul = judul;
         this.penulis = penulis;
         this.kategori = kategori;
         this.stock = stock;
-        this.durasi = durasi;
     }
 
     public String getBookId() {
@@ -67,25 +66,19 @@ public class Book {
 }
 
 class HistoryBook extends Book {
-    String kategori = "History";
-
-    public HistoryBook(String bookId, String judul, String penulis, String kategori, int stock, int durasi) {
-        super(bookId, judul, penulis, kategori, stock, durasi);
+    public HistoryBook(String bookId, String judul, String penulis, String kategori, int stock) {
+        super(bookId, judul, penulis, kategori, stock);
     }
 }
 
 class StoryBook extends Book{
-    String kategori = "Story";
-
-    public StoryBook(String bookId, String judul, String penulis, String kategori, int stock, int durasi) {
-        super(bookId, judul, penulis, kategori, stock, durasi);
+    public StoryBook(String bookId, String judul, String penulis, String kategori, int stock) {
+        super(bookId, judul, penulis, kategori, stock);
     }
 }
 
 class TextBook extends Book{
-    String kategori = "TextBook";
-
-    public TextBook(String bookId, String judul, String penulis, String kategori, int stock, int durasi) {
-        super(bookId, judul, penulis, kategori, stock, durasi);
+    public TextBook(String bookId, String judul, String penulis, String kategori, int stock) {
+        super(bookId, judul, penulis, kategori, stock);
     }
 }
