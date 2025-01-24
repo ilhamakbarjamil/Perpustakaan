@@ -8,15 +8,19 @@ public class User {
     public ArrayList<Book> dataBuku = new ArrayList<>();
     public Scanner scan = new Scanner(System.in);
 
-    public void displayBook(Book buku) {
-        System.out.println("Book Id: " + buku.getBookId());
-        System.out.println("Judul: " + buku.getJudul());
-        System.out.println("Penulis: " + buku.getPenulis());
-        System.out.println("Kategori: " + buku.getKategori());
-        System.out.println("Stock: " + buku.getStock());
+    public void displayBook() {
+        System.out.println("\ndaftar buku\n");
+        for(Book buku : dataBuku){
+            System.out.println("BookId:: "+buku.getBookId());
+            System.out.println("Judul: "+buku.getJudul());
+            System.out.println("Penulis: "+buku.getPenulis());
+            System.out.println("Kategori: "+buku.getKategori());
+            System.out.println("Stock: "+buku.getStock());
+            System.out.println("");
+        }
     }
 
-    protected void addBook(String bookId, String judul, String penulis, String kategori, int stock) {
+    public void addBook(String bookId, String judul, String penulis, String kategori, int stock) {
         System.out.println("Tambah Buku");
         System.out.print("Masukkan Book Id: ");
         bookId = scan.nextLine();
@@ -30,8 +34,16 @@ public class User {
         stock = scan.nextInt();
         scan.nextLine();
 
-        Book buku = new Book(bookId, judul, penulis, kategori, stock);
-        dataBuku.add(buku);
+        if(kategori.equalsIgnoreCase("history book")){
+            HistoryBook history = new HistoryBook(bookId, judul, penulis, "History Book", stock);
+            dataBuku.add(history);
+        }else if(kategori.equalsIgnoreCase("story book")){
+            StoryBook story = new StoryBook(bookId, judul, penulis, "Story Book", stock);
+            dataBuku.add(story);
+        }else if(kategori.equalsIgnoreCase("text book")){
+            TextBook text = new TextBook(bookId, judul, penulis, "Text Book", stock);
+            dataBuku.add(text);
+        }
     }
 
 }
@@ -70,7 +82,7 @@ class Student extends User {
         System.out.println("Prodi: " + getProdi());
     }
 
-    private void displayBookBorrowed() {
+    public void displayBookBorrowed() {
         System.out.println("Buku yang dipinjam: ");
         if (bukuYangDipinjam.isEmpty()) {
             System.out.println("Tidak ada buku yang dipinjam");
@@ -87,7 +99,7 @@ class Student extends User {
         }
     }
 
-    private void PinjamBuku() {
+    public void PinjamBuku() {
         System.out.print("Masukkan judul buku yang ingin dipinjam: ");
         String judul = scan.nextLine();
         boolean found = false;
@@ -120,7 +132,7 @@ class Student extends User {
         }
     }
 
-    private void returnBook() {
+    public void returnBook() {
         System.out.print("Masukkan judul buku yang di kembalikan: ");
         String judul = scan.nextLine();
         boolean found = false;
@@ -129,7 +141,7 @@ class Student extends User {
             if (judul.contains(buku.getJudul())) {
                 found = true;
                 buku.setStock(buku.getStock() + 1);
-                bukuYangDipinjam.remove(judul);
+                bukuYangDipinjam.remove(buku.getJudul());
                 System.out.println("buku '" + buku.getJudul() + "', berhasil di kembalikan");
             }
         }
@@ -154,7 +166,21 @@ class Admin extends User {
     Scanner scan = new Scanner(System.in);
     static ArrayList<Student> dataMahasiswa = new ArrayList<>();
 
-    private void addStudent() {
+    public void addStudent(String nama, String nim, String fakultas, String prodi) {
+        System.out.print("Masukkan Nama Mahasiswa: ");
+        nama = scan.nextLine();
+        System.out.print("Masukkan Nim Mahasiswa: ");
+        nim = scan.nextLine();
+        System.out.print("Masukkan Fakultas Mahasiswa: ");
+        fakultas = scan.nextLine();
+        System.out.print("Masukkan Prodi Mahasiswa: ");
+        prodi = scan.nextLine();
+
+        Student student = new Student(nama, nim, fakultas, prodi);
+        dataMahasiswa.add(student);
+    }
+
+    public void addStudent() {
         System.out.print("Masukkan Nama Mahasiswa: ");
         String nama = scan.nextLine();
         System.out.print("Masukkan Nim Mahasiswa: ");
@@ -171,29 +197,37 @@ class Admin extends User {
     public void InputBook() {
         System.out.println("Tambah Buku");
         System.out.print("Masukkan Book Id: ");
-        String bookId = scan.nextLine();
+        String bookId = generateId();
+        System.out.println("Book Id: " + bookId);
         System.out.print("Masukkan judul buku: ");
         String judul = scan.nextLine();
         System.out.print("Masukkan penulis buku: ");
         String penulis = scan.nextLine();
-        System.out.print("Masukkan kategori buku: ");
+        System.out.println("Pilih kategori buku:");
+        System.out.println("1. History Book");
+        System.out.println("2. Story Book"); 
+        System.out.println("3. Text Book");
+        System.out.print("Masukkan pilihan (1-3): ");
         String kategori = scan.nextLine();
+        
         System.out.print("Masukkan stock Buku: ");
-        int stock = scan.nextInt();
-        scan.nextLine();
+        int stock = Integer.parseInt(scan.nextLine());
 
         switch (kategori) {
             case "1":
                 HistoryBook historyBook = new HistoryBook(bookId, judul, penulis, "History Book", stock);
                 dataBuku.add(historyBook);
+                System.out.println("Buku History berhasil ditambahkan");
                 break;
             case "2":
                 StoryBook storyBook = new StoryBook(bookId, judul, penulis, "Story Book", stock);
                 dataBuku.add(storyBook);
+                System.out.println("Buku Story berhasil ditambahkan");
                 break;
             case "3":
                 TextBook textBook = new TextBook(bookId, judul, penulis, "Text Book", stock);
                 dataBuku.add(textBook);
+                System.out.println("Buku Text berhasil ditambahkan");
                 break;
             default:
                 System.out.println("Kategori tidak valid");
@@ -201,7 +235,7 @@ class Admin extends User {
         }
     }
 
-    private void displayStudent() {
+    public void displayStudent() {
         System.out.println("\nData Mahasiswa\n");
         if (dataMahasiswa.isEmpty()) {
             System.out.println("Data Kosong");
@@ -216,26 +250,8 @@ class Admin extends User {
         }
     }
 
-    private boolean isAdmin(String username, String password) {
-        do {
-            System.out.print("Masukkan Username: ");
-            username = scan.nextLine();
-            System.out.print("Masukkan Password: ");
-            password = scan.nextLine();
-
-            if (username.equalsIgnoreCase(username_cek) && password.equalsIgnoreCase(password_cek)) {
-                return true;
-            } else {
-                System.out.println("Username atau Password Salah");
-                return false;
-            }
-        } while (username != username_cek || password != password_cek);
-    }
-
-    private String generated_Id() {
+    public String generateId() {
         String id = UUID.randomUUID().toString();
-        String sortId = id.substring(0, 8);
-
-        return sortId;
+        return "BK-" + id.substring(0, 8).toUpperCase();
     }
 }
