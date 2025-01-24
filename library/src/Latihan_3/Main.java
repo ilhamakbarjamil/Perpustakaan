@@ -5,22 +5,21 @@ import java.util.Scanner;
 public class Main {
     Scanner scan = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {      
+        Admin admin = new Admin();
+        Main.addTempBook(admin);
+        Main.addTempStudent(admin);
         Main main = new Main();
         main.menu();
     }
 
-    // public void addTempBook(){
-    //     User user = new User();
-    //     user.addBook("BK-12345678", "Santet", "Alexander", "story book", 10);
+    public static void addTempBook(User user){
+        user.dataBuku.add(new Book("BK-12345678", "Santet", "Alexander", "story book", 10));
+    }
 
-    // }
-
-    // public void addTempStudent(){
-    //     Admin admin = new Admin();
-    //     admin.addStudent("Ilham Akbar Jamil", "202310370311085", "Teknik", "Informatika");
-    //     admin.dataMahasiswa.add(admin);
-    // }
+    public static void addTempStudent(Admin admin){
+        admin.dataMahasiswa.add(new Student("Ilham Akbar Jamil", "202310370311085", "Teknik", "Informatika"));
+    }
 
     public void menu() {
         while (true) {
@@ -134,7 +133,7 @@ public class Main {
     }
 
     public void menuAdmin() {
-        Admin admin = new Admin();
+       Admin admin = new Admin();
         while (true) {
             System.out.println("---- Admin Menu ----");
             System.out.println("1. Tambah Student");
