@@ -164,6 +164,7 @@ class Student extends User {
                         } else {
                             buku1.setStock(buku1.getStock() + jumlah);
                             buku2.setStock(buku2.getStock() - jumlah);
+                            bukuYangDipinjam.remove(buku2);
                             System.out.println("Buku " + judul + " berhasil di kembalikan");
                             return;
                         }
@@ -254,6 +255,7 @@ class Admin extends User {
     private boolean bookIdSama(String bookId){
         for(Book buku : dataBuku){
             if(buku.getJudul().equalsIgnoreCase(bookId)){
+                System.out.println("Book Id sudah ada");
                 return true;
             }
         }

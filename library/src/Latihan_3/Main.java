@@ -30,7 +30,7 @@ public class Main {
             System.out.print("pilih (1-3): ");
             int pilih = scan.nextInt();
             scan.nextLine();
-
+            
             switch (pilih) {
                 case 1:
                     checkNim();
