@@ -135,7 +135,7 @@ public class Main {
     public void menuAdmin() {
        Admin admin = new Admin();
         while (true) {
-            System.out.println("---- Admin Menu ----");
+            System.out.println("\n---- Admin Menu ----");
             System.out.println("1. Tambah Student");
             System.out.println("2. Tambah buku");
             System.out.println("3. Display Registered Student");

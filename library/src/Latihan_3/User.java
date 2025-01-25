@@ -125,7 +125,8 @@ class Student extends User {
                         } else {
                             buku1.setStock(buku1.getStock() - jumlah);
 
-                            Book buku2 = new Book(buku1.getBookId(), buku1.getJudul(), buku1.getPenulis(),buku1.getKategori(), jumlah);
+                            Book buku2 = new Book(buku1.getBookId(), buku1.getJudul(), buku1.getPenulis(),
+                                    buku1.getKategori(), jumlah);
                             buku2.setDurasi(durasi);
                             bukuYangDipinjam.add(buku2);
                             System.out.println("Buku " + judul + " berhasil dipinjam");
@@ -196,6 +197,12 @@ class Admin extends User {
         nama = scan.nextLine();
         System.out.print("Masukkan Nim Mahasiswa: ");
         nim = scan.nextLine();
+
+        if (ifNimExist(nim)) {
+            System.out.println("Nim sudah ada");
+            return;
+        }
+
         System.out.print("Masukkan Fakultas Mahasiswa: ");
         fakultas = scan.nextLine();
         System.out.print("Masukkan Prodi Mahasiswa: ");
@@ -205,11 +212,26 @@ class Admin extends User {
         dataMahasiswa.add(student);
     }
 
+    private boolean ifNimExist(String nim) {
+        for (Student student : dataMahasiswa) {
+            if (student.getNim().equalsIgnoreCase(nim)) {
+                System.out.println("Nim sudah ada");
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addStudent() {
         System.out.print("Masukkan Nama Mahasiswa: ");
         String nama = scan.nextLine();
-        System.out.print("Masukkan Nim Mahasiswa: ");
-        String nim = scan.nextLine();
+
+        String nim;
+        do {
+            System.out.print("Masukkan Nim Mahasiswa: ");
+            nim = scan.nextLine();
+        } while (ifNimExist(nim) || nim.length() != 15);
+
         System.out.print("Masukkan Fakultas Mahasiswa: ");
         String fakultas = scan.nextLine();
         System.out.print("Masukkan Prodi Mahasiswa: ");
@@ -219,15 +241,45 @@ class Admin extends User {
         dataMahasiswa.add(student);
     }
 
+    private boolean judulsama(String judul) {
+        for (Book book : dataBuku) {
+            if (book.getJudul().equalsIgnoreCase(judul)) {
+                System.out.println("Judul sudah ada");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean bookIdSama(String bookId){
+        for(Book buku : dataBuku){
+            if(buku.getJudul().equalsIgnoreCase(bookId)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void InputBook() {
         System.out.println("Tambah Buku");
-        System.out.print("Masukkan Book Id: ");
-        String bookId = generateId();
-        System.out.println("Book Id: " + bookId);
-        System.out.print("Masukkan judul buku: ");
-        String judul = scan.nextLine();
+
+        String bookId;
+        do {
+            System.out.print("Masukkan Book Id: ");
+            bookId = generateId();
+            System.out.println("Book Id: " + bookId);
+        } while (bookIdSama(bookId));
+
+        String judul;
+
+        do {
+            System.out.print("Masukkan judul buku: ");
+            judul = scan.nextLine();
+        } while (judulsama(judul));
+
         System.out.print("Masukkan penulis buku: ");
         String penulis = scan.nextLine();
+
         System.out.println("Pilih kategori buku:");
         System.out.println("1. History Book");
         System.out.println("2. Story Book");
