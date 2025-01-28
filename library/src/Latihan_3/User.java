@@ -146,34 +146,34 @@ class Student extends User {
     public void returnBook() {
         displayBookBorrowed();
         while (true) {
-            System.out.print("Masukkan judul buku yang di kembalikan: ");
+            System.out.print("Masukkan judul buku yang akan di kembalikan: ");
             String judul = scan.nextLine();
-            boolean found = false;
 
-            for (Book buku1 : dataBuku) {
-                for (Book buku2 : bukuYangDipinjam) {
-                    if (judul.equalsIgnoreCase(buku2.getJudul())) {
+            for (Book buku1 : bukuYangDipinjam) {
+                if(buku1.getJudul().equalsIgnoreCase(judul)){
 
-                        found = true;
-                        System.out.print("Masukkan jumlah buku yang di kembalikan: ");
-                        int jumlah = scan.nextInt();
-                        scan.nextLine();
+                    System.out.print("Masukkan jumlah buku yang di kembalikan: ");
+                    int jumlah = scan.nextInt();
+                    scan.nextLine();
 
-                        if (jumlah > buku2.getStock()) {
-                            System.out.println("Melebihi stok yang di pinjam: " + buku2.getStock());
-                        } else {
-                            buku1.setStock(buku1.getStock() + jumlah);
-                            buku2.setStock(buku2.getStock() - jumlah);
-                            bukuYangDipinjam.remove(buku2);
-                            System.out.println("Buku " + judul + " berhasil di kembalikan");
+                    for(Book buku2 : dataBuku){
+                        if(jumlah <= buku1.getStock()){
+                            buku2.setStock(buku2.getStock() + jumlah);
+                            buku1.setStock(buku1.getStock() - jumlah);
+
+                            if(buku1.getStock() == 0){
+                                bukuYangDipinjam.remove(buku1);
+                            }
+
+                            System.out.println("Buku berhsil di kembalikan");
                             return;
+                        }else{
+                            System.out.println("Melebihi batas yang di pinjam");
                         }
                     }
+                }else{
+                    System.out.println(judul+" tidak ditemukan");
                 }
-            }
-
-            if (!found) {
-                System.out.println("Buku " + judul + ", tidak di temukan ");
             }
         }
     }
@@ -252,9 +252,9 @@ class Admin extends User {
         return false;
     }
 
-    private boolean bookIdSama(String bookId){
-        for(Book buku : dataBuku){
-            if(buku.getJudul().equalsIgnoreCase(bookId)){
+    private boolean bookIdSama(String bookId) {
+        for (Book buku : dataBuku) {
+            if (buku.getJudul().equalsIgnoreCase(bookId)) {
                 System.out.println("Book Id sudah ada");
                 return true;
             }
