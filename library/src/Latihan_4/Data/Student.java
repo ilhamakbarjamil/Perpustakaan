@@ -60,13 +60,16 @@ public class Student extends User {
                     displayInfo();
                     break;
                 case 2:
+                    showBorrowedBook();
                     break;
                 case 3:
+                    choiceBook();
                     break;
                 case 4:
+                    returnBook();
                     break;
                 case 5:
-
+                    logout();
                     return;
                 default:
                     break;
@@ -93,17 +96,80 @@ public class Student extends User {
     }
 
     public void choiceBook(){
+        displayBook();
+        while (true) {
+            
+            System.out.print("Masukkan judul: ");
+            String judul = scan.nextLine();
 
+            for(Latihan_4.Book.Book buku1 : data_buku){
+                if(buku1.getJudul().equalsIgnoreCase(judul)){
+                    System.out.print("Masukkan jumlah pinjam: ");
+                    int jumlah = scan.nextInt();
+                    scan.nextLine();
+
+                    if(jumlah > buku1.getStock()){
+                        System.out.println("Melebihi jumlah yang ada");
+                    }else{
+                        System.out.print("Pinjam berapa hari (max. 14 hari): ");
+                        int durasi = scan.nextInt();
+                        scan.nextLine();
+
+                        if(durasi > 14){
+                            System.out.println("melebihi ketentuan");
+                        }
+                        else{
+                            for(Book buku2 : buku_terpinjam){
+                                buku1.setStock(buku1.getStock() - jumlah);
+                                buku2.setStock(buku2.getStock() + jumlah);
+                                buku2.setDurasi(durasi);
+                                buku_terpinjam.add(buku2);
+                                System.out.println("Buku '"+judul+"' berhasil di pinjam");
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
     }
 
     public void returnBook(){
-        
+        showBorrowedBook();
+
+        while (true) {
+            
+            System.out.println("Masukkan judul buku: ");
+            String judul = scan.nextLine();
+
+            for(Book buku2 : buku_terpinjam){
+                if(buku2.getJudul().equalsIgnoreCase(judul)){
+
+                    System.out.print("Masukkan jumlah kembali: ");
+                    int jumlah = scan.nextInt();
+                    scan.nextLine();
+
+                    if(jumlah > buku2.getStock()){
+                        System.out.println("Melebihi jumlah yang di pinjam");
+                    }else{
+                        for(Latihan_4.Book.Book buku1 : data_buku){
+                            buku1.setStock(buku1.getStock() + jumlah);
+                            buku2.setStock(buku2.getStock() - jumlah);
+
+                            if(buku2.getStock() == 0){
+                                buku_terpinjam.remove(buku2);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void logout(){
         System.out.println("Berhasil keluar, '"+getNama()+"'");
         return;
     }
-
-
 }

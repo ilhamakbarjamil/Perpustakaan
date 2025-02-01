@@ -8,7 +8,7 @@ import Latihan_4.Util.iMenu;
 
 public class User implements iMenu{
 
-    ArrayList<Book> data_buku = new ArrayList<>();
+    protected ArrayList<Book> data_buku = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
     
 
