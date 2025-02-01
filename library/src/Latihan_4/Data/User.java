@@ -13,7 +13,8 @@ public class User implements iMenu{
     
 
     public void displayBook(){
-
+        System.out.println("Daftar Buku yang tersedia");
+        System.out.println("==========================");
     }
 
     public void addBook(){

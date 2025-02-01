@@ -91,4 +91,19 @@ public class Student extends User {
             }
         }
     }
+
+    public void choiceBook(){
+
+    }
+
+    public void returnBook(){
+        
+    }
+
+    public void logout(){
+        System.out.println("Berhasil keluar, '"+getNama()+"'");
+        return;
+    }
+
+
 }
