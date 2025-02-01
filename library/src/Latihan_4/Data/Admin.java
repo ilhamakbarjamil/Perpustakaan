@@ -10,7 +10,9 @@ import Latihan_4.Book.TextBook;
 
 public class Admin extends User {
 
-    ArrayList<Student> data_mahasiswa = new ArrayList<>();
+    public static ArrayList<Student> data_mahasiswa = new ArrayList<>();
+    private String username = "admin";
+    private String pass = "admin123";
 
     @Override
     public void menu() {
@@ -57,28 +59,28 @@ public class Admin extends User {
                 System.out.print("Masukkan Nama Mahasiswa: ");
                 nama = scan.nextLine();
 
-                if (nama.matches(".*[0-9!@#$%^&*+=]*.")) {
+                if (nama.matches(".*[0-9!@#$%^&*+=].*")) {
                     System.out.println("Harus menggunakan huruf");
                 }
 
                 System.out.print("Masukkan Nim Mahasiswa: ");
                 nim = scan.nextLine();
 
-                if (nim.length() != 15 && nim.matches(".*[a-zA-Z!@#$%^&*]*.")) {
+                if (nim.length() != 15 && nim.matches(".*[a-zA-Z!@#$%^&*].*")) {
                     System.out.println("Nim harus menggunakan angka");
                 }
 
                 System.out.print("Masukkan Fakultas Mahasiswa: ");
                 fakultas = scan.nextLine();
 
-                if (fakultas.matches(".*[0-9!@#$%^&*+=]*.")) {
+                if (fakultas.matches(".*[0-9!@#$%^&*+=].*")) {
                     System.out.println("Harus menggunakan huruf");
                 }
 
                 System.out.print("Masukkan Prodi Mahasiswa: ");
                 prodi = scan.nextLine();
 
-                if (prodi.matches(".*[0-9!@#$%^&*+=]*.")) {
+                if (prodi.matches(".*[0-9!@#$%^&*+=].*")) {
                     System.out.println("Harus menggunakan huruf");
                 }
 
@@ -169,24 +171,46 @@ public class Admin extends User {
         }
     }
 
-    public void displayStudent(){
+    public void displayStudent() {
         System.out.println("\nDaftar Mahasiswa");
         System.out.println("===================");
-        if(data_mahasiswa.isEmpty()){
+        if (data_mahasiswa.isEmpty()) {
             System.out.println("Data Kosong");
-        }else{
-            for(Student student : data_mahasiswa){
-                System.out.println("Nama: "+student.getNama());
-                System.out.println("Nim: "+student.getNim());
-                System.out.println("Fakultas: "+student.getFakultas());
-                System.out.println("Prodi: "+student.getProdi());
+        } else {
+            for (Student student : data_mahasiswa) {
+                System.out.println("Nama: " + student.getNama());
+                System.out.println("Nim: " + student.getNim());
+                System.out.println("Fakultas: " + student.getFakultas());
+                System.out.println("Prodi: " + student.getProdi());
                 System.out.println("--");
             }
         }
     }
 
-    public String generateId(){
+    public String generateId() {
         String id = UUID.randomUUID().toString();
         return "77-" + id.substring(0, 8).toUpperCase();
+    }
+
+    public void isadmin() {
+        while (true) {
+            System.out.print("Masukkan username: ");
+            String username1 = scan.nextLine();
+
+            if (username.equalsIgnoreCase(username1)) {
+                System.out.print("Masukkan password: ");
+                String password = scan.nextLine();
+
+                if (pass.equalsIgnoreCase(password)) {
+                    menu();
+                    break;
+                }else{
+                    System.out.println("password salah");
+                }
+
+            } else {
+                System.out.println("username salah");
+            }
+        }
     }
 }
