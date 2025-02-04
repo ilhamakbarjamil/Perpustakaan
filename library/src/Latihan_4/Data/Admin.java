@@ -55,119 +55,121 @@ public class Admin extends User {
 
         while (true) {
             String nama, nim, fakultas, prodi;
+            boolean nim_sudah_ada;
+
             do {
                 System.out.print("Masukkan Nama Mahasiswa: ");
                 nama = scan.nextLine();
 
-                if (nama.matches(".*[0-9!@#$%^&*+=].*")) {
-                    System.out.println("Harus menggunakan huruf");
+                if (nama.matches(".*[0-9].*")) {
+                    System.out.println("Terdeteksi menggunakan angka");
                 }
+            } while (nama.matches(".*[0-9].*"));
 
-                System.out.print("Masukkan Nim Mahasiswa: ");
+            do {
+                nim_sudah_ada = false;
+                System.out.print("Masukkan Nim Mahasisw: ");
                 nim = scan.nextLine();
 
-                if (nim.length() != 15 && nim.matches(".*[a-zA-Z!@#$%^&*].*")) {
-                    System.out.println("Nim harus menggunakan angka");
+                if (nim.matches(".*[a-zA-Z].*")) {
+                    System.out.println("Terdeteksi menggunakan angka");
+                    continue;
+                } else if (nim.length() != 15) {
+                    System.out.println("Panjang Nim harus 15 karakter");
+                    continue;
+                } else {
+                    for (Student sama : data_mahasiswa) {
+                        if (sama.getNim().equalsIgnoreCase(nim)) {
+                            System.out.println("Nim sudah ada");
+                            nim_sudah_ada = true;
+                            break;
+                        }
+                    }
                 }
+            } while (nim.matches(".*[a-zA-Z].*") || nim.length() != 15 || nim_sudah_ada);
 
+            do {
                 System.out.print("Masukkan Fakultas Mahasiswa: ");
                 fakultas = scan.nextLine();
 
-                if (fakultas.matches(".*[0-9!@#$%^&*+=].*")) {
-                    System.out.println("Harus menggunakan huruf");
+                if (fakultas.matches(".*[0-9].*")) {
+                    System.out.println("Terdeteksi menggunakan angka");
                 }
 
+            } while (fakultas.matches(".*[0-9].*"));
+
+            do {
                 System.out.print("Masukkan Prodi Mahasiswa: ");
                 prodi = scan.nextLine();
 
-                if (prodi.matches(".*[0-9!@#$%^&*+=].*")) {
-                    System.out.println("Harus menggunakan huruf");
+                if (prodi.matches(".*[0-9].*")) {
+                    System.out.println("Terdeteksi menggunaakn angka");
                 }
+            } while (prodi.matches(".*[0-9].*"));
 
-                Student student = new Student(nama, nim, fakultas, prodi);
-                data_mahasiswa.add(student);
-                return;
-
-            } while (nama.matches(".*[0-9!@#$%^&*+=]*.") || nim.length() != 15 && nim.matches(".*[a-zA-Z!@#$%^&*]*.")
-                    || fakultas.matches(".*[0-9!@#$%^&*+=]*.") || prodi.matches(".*[0-9!@#$%^&*+=]*."));
-
+            Student student = new Student(nama, nim, fakultas, prodi);
+            data_mahasiswa.add(student);
+            break;
         }
     }
 
     public void inputBook() {
 
-        String BookId, judul, penulis, kategori;
-        int stock;
         while (true) {
+            System.out.print("Masukkan BookId: ");
+            String BookId = generateId();
+            System.out.println(generateId());
 
-            for (Book buku : data_buku) {
-                do {
-                    System.out.print("Masukkan BookId: ");
-                    BookId = generateId();
-                    System.out.println(generateId());
+            String judul;
+            boolean judul_sudahAda;
+            do {
+                judul_sudahAda = false;
+                System.out.print("Masukkan Judul Buku: ");
+                judul = scan.nextLine();
 
-                    System.out.print("Masukkan Judul: ");
-                    judul = scan.nextLine();
-                    if (buku.getJudul().equalsIgnoreCase(judul)) {
+                for(Book buku : data_buku){
+                    if(buku.getJudul().equalsIgnoreCase(judul)){
                         System.out.println("Buku sudah ada");
+                        judul_sudahAda = true;
+                        break;
                     }
+                }
+            } while (judul_sudahAda);
 
-                    System.out.print("Masukkan Penulis: ");
-                    penulis = scan.nextLine();
+            System.out.print("Masukkan Penulis Buku: ");
+            String penulis = scan.nextLine();
 
-                    System.out.println("Masukkan Kategori");
-                    System.out.println("1. History Book");
-                    System.out.println("2. Story Book");
-                    System.out.println("3. Text Book");
-                    System.out.print("Pilih(1-3): ");
-                    kategori = scan.nextLine();
+            System.out.println("Masukkan Kategori: ");
+            System.out.println("1. History Book");
+            System.out.println("2. Story Book");
+            System.out.println("3. Text Book");
+            System.out.print("PIlih (1-3)");
+            String kategori = scan.nextLine();
 
-                    System.out.print("Masukkan jumlah: ");
-                    stock = scan.nextInt();
-                    scan.nextLine();
+            System.out.print("Masukkan jumlah buku: ");
+            int jumlah = scan.nextInt();
+            scan.nextLine();
 
-                    switch (kategori) {
-                        case "1":
-                            HistoryBook historyBook = new HistoryBook(BookId, judul, penulis, "History Book", stock);
-                            data_buku.add(historyBook);
-                            break;
-
-                        case "2":
-                            StoryBook storyBook = new StoryBook(BookId, judul, penulis, "Story Book", stock);
-                            data_buku.add(storyBook);
-                            break;
-
-                        case "3":
-                            TextBook textBook = new TextBook(BookId, judul, penulis, "Text Book", stock);
-                            data_buku.add(textBook);
-                            break;
-
-                        default:
-                            System.out.println("Pilihan hanya 1-3");
-                            break;
-                    }
-                    return;
-
-                } while (buku.getJudul().equalsIgnoreCase(judul));
+            switch (kategori) {
+                case "1":
+                    HistoryBook historyBook = new HistoryBook(BookId, judul, penulis, "History Book", jumlah);
+                    data_buku.add(historyBook);
+                    break;
+                case "2":
+                    StoryBook storyBook = new StoryBook(BookId, judul, penulis, "Story Book", jumlah);
+                    data_buku.add(storyBook);
+                    break;
+                case "3":
+                    TextBook textBook = new TextBook(BookId, judul, penulis, "Text Book", jumlah);
+                    data_buku.add(textBook);
+                    break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
             }
 
-        }
-    }
-
-    @Override
-    public void displayBook() {
-        super.displayBook();
-        for (Book buku : data_buku) {
-            if (data_buku.isEmpty()) {
-                System.out.println("Buku Kosong");
-            } else {
-                System.out.println("BookId: " + buku.getBookId());
-                System.out.println("Judul: " + buku.getJudul());
-                System.out.println("Penulis: " + buku.getPenulis());
-                System.out.println("Kategori: " + buku.getKategori());
-                System.out.println("Jumlah: " + buku.getStock());
-                System.out.println("-");
-            }
+            
+            break;
         }
     }
 
@@ -185,6 +187,7 @@ public class Admin extends User {
                 System.out.println("--");
             }
         }
+        System.out.println("===================");
     }
 
     public String generateId() {
@@ -204,7 +207,7 @@ public class Admin extends User {
                 if (pass.equalsIgnoreCase(password)) {
                     menu();
                     break;
-                }else{
+                } else {
                     System.out.println("password salah");
                 }
 

@@ -96,9 +96,9 @@ public class Student extends User {
     }
 
     public void choiceBook(){
-        displayBook();
+        
         while (true) {
-            
+            displayBook();
             System.out.print("Masukkan judul: ");
             String judul = scan.nextLine();
 

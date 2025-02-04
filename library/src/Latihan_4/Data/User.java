@@ -15,6 +15,14 @@ public class User implements iMenu{
     public void displayBook(){
         System.out.println("Daftar Buku yang tersedia");
         System.out.println("==========================");
+        for(Book buku : data_buku){
+            System.out.println("BookId: "+buku.getBookId());
+            System.out.println("Judul: "+buku.getJudul());
+            System.out.println("Penulis: "+buku.getPenulis());
+            System.out.println("Kategori: "+buku.getKategori());
+            System.out.println("Stock: "+buku.getStock());
+            System.out.println("-");
+        }
     }
 
     public void addBook(){
