@@ -1,4 +1,4 @@
-package Latihan_4.Data;
+package Latihan_5.Data;
 
 import java.util.ArrayList;
 import java.util.Scanner;

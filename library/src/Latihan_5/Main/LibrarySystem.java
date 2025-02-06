@@ -1,4 +1,4 @@
-package Latihan_4.Main;
+package Latihan_5.Main;
 
 import java.util.Scanner;
 
