@@ -59,7 +59,4 @@ public class Book {
     public void setDurasi(int durasi) {
         this.durasi = durasi;
     }
-
-    
-
 }

@@ -5,8 +5,9 @@ import java.util.Scanner;
 
 import Latihan_4.Book.Book;
 import Latihan_4.Util.iMenu;
+import Latihan_5.IllegalAdminAccess.IllegalAdminAccess;
 
-public class User implements iMenu{
+public class User extends Exception implements iMenu {
 
     public static ArrayList<Book> data_buku = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
@@ -30,7 +31,7 @@ public class User implements iMenu{
     }
 
     @Override
-    public void menu() {
+    public void menu(){
         
     }
 
