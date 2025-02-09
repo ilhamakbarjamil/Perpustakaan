@@ -1,0 +1,65 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Latihan_1",
+            "request": "launch",
+            "mainClass": "Latihan_1.Latihan_1",
+            "projectName": "Perpustakaan_6546ce66"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Latihan_2.part_1.Main",
+            "projectName": "Perpustakaan_6546ce66"
+        },
+        {
+            "type": "java",
+            "name": "Main(1)",
+            "request": "launch",
+            "mainClass": "Latihan_2.part_2.Main",
+            "projectName": "Perpustakaan_6546ce66"
+        },
+        {
+            "type": "java",
+            "name": "Main(2)",
+            "request": "launch",
+            "mainClass": "Latihan_3.Main",
+            "projectName": "Perpustakaan_6546ce66"
+        },
+        {
+            "type": "java",
+            "name": "LibrarySystem",
+            "request": "launch",
+            "mainClass": "Latihan_4.Main.LibrarySystem",
+            "projectName": "Perpustakaan_6546ce66"
+        },
+        {
+            "type": "java",
+            "name": "LibrarySystem(1)",
+            "request": "launch",
+            "mainClass": "Latihan_5.Main.LibrarySystem",
+            "projectName": "Perpustakaan_6546ce66"
+        },
+        {
+            "type": "java",
+            "name": "Hello",
+            "request": "launch",
+            "mainClass": "Latihan_6.Hello",
+            "projectName": "Perpustakaan_6546ce66",
+            "vmArgs": "--module-path \"D:/Latihan_ngoding/java/Library/javafx-sdk-23.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
