@@ -16,7 +16,7 @@ public class Hello extends Application{
         
         VBox vbox = new VBox();
         Button btn1 = new Button("Submit");
-        vbox.setAlignment(Pos.CENTER);
+        btn1.setAlignment(Pos.CENTER);
 
         Label usernem = new Label("Username");
         TextField usernamTextField = new TextField();
@@ -39,7 +39,6 @@ public class Hello extends Application{
             }
         });
         vbox.getChildren().addAll(usernem,usernamTextField, passwordL, passwordField, btn1, outputLabel);
-
 
         VBox root = new VBox();
         root.getChildren().addAll(vbox);
