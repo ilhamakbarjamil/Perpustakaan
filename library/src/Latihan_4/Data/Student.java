@@ -1,11 +1,11 @@
 package Latihan_4.Data;
 
 import java.util.ArrayList;
-import Latihan_3.Book;
+import Latihan_4.Book.Book;
 
 public class Student extends User {
 
-    ArrayList<Book> buku_terpinjam = new ArrayList<>();
+    private ArrayList<Book> buku_terpinjam = new ArrayList<>();
 
     private String nama, nim, fakultas, prodi;
 
@@ -77,90 +77,58 @@ public class Student extends User {
         }
     }
 
-    public void showBorrowedBook(){
+    public void showBorrowedBook() {
         System.out.println("Buku yang anda Pinjam");
         System.out.println("=====================");
-        if(buku_terpinjam.isEmpty()){
+        if (buku_terpinjam.isEmpty()) {
             System.out.println("Daftar Buku Kosong");
-        }else{
-            for(Book buku : buku_terpinjam){
-                System.out.println("BookId: "+buku.getBookId());
-                System.out.println("Judul: "+buku.getJudul());
-                System.out.println("Penulis: "+buku.getPenulis());
-                System.out.println("Kategori: "+buku.getKategori());
-                System.out.println("Jumlah: "+buku.getStock());
-                System.out.println("Durasi: "+buku.getDurasi()+" hari");
+        } else {
+            for (Book buku : buku_terpinjam) {
+                System.out.println("BookId: " + buku.getBookId());
+                System.out.println("Judul: " + buku.getJudul());
+                System.out.println("Penulis: " + buku.getPenulis());
+                System.out.println("Kategori: " + buku.getKategori());
+                System.out.println("Jumlah: " + buku.getStock());
+                System.out.println("Durasi: " + buku.getDurasi() + " hari");
                 System.out.println("\n");
             }
         }
     }
 
-    public void choiceBook(){
-        
+    public void choiceBook() {
+
         while (true) {
             displayBook();
-            System.out.print("Masukkan judul: ");
+            System.out.print("Masukkan judul buku yang ingin di pinjam: ");
             String judul = scan.nextLine();
 
-            for(Latihan_4.Book.Book buku1 : data_buku){
-                if(buku1.getJudul().equalsIgnoreCase(judul)){
-                    System.out.print("Masukkan jumlah pinjam: ");
-                    int jumlah = scan.nextInt();
-                    scan.nextLine();
-
-                    if(jumlah > buku1.getStock()){
-                        System.out.println("Melebihi jumlah yang ada");
-                    }else{
-                        System.out.print("Pinjam berapa hari (max. 14 hari): ");
-                        int durasi = scan.nextInt();
+            if (judul.isEmpty()) {
+                System.out.println("judul tidak boleh kosong");
+            } else {
+                for (Latihan_4.Book.Book buku : data_buku) {
+                    if (buku.getJudul().equalsIgnoreCase(judul)) {
+                        System.out.println("buku ditemukan");
+                        System.out.print("Masukkan jumlah yang ingin di pinjam: ");
+                        int jumlah = scan.nextInt();
                         scan.nextLine();
 
-                        if(durasi > 14){
-                            System.out.println("melebihi ketentuan");
-                        }
-                        else{
-                            for(Book buku2 : buku_terpinjam){
-                                buku1.setStock(buku1.getStock() - jumlah);
-                                buku2.setStock(buku2.getStock() + jumlah);
+                        if (jumlah > buku.getStock()) {
+                            System.out.println("Maaf stock saat ini hanya " + buku.getStock());
+                        } else {
+                            System.out.print("Berapa lama (maks. 14 hari): ");
+                            int durasi = scan.nextInt();
+                            scan.nextLine();
+
+                            if (durasi > 14) {
+                                System.out.println("Melebihi batas");
+                            } else {
+                                Book buku2 = new Book(buku.getBookId(), buku.getJudul(), buku.getPenulis(), buku.getKategori(), buku.getStock());
                                 buku2.setDurasi(durasi);
                                 buku_terpinjam.add(buku2);
-                                System.out.println("Buku '"+judul+"' berhasil di pinjam");
+                                System.out.println("buku berhasil di pijam");
                                 return;
                             }
-                        }
-                    }
-                }
-            }
 
-        }
-    }
-
-    public void returnBook(){
-        showBorrowedBook();
-
-        while (true) {
-            
-            System.out.println("Masukkan judul buku: ");
-            String judul = scan.nextLine();
-
-            for(Book buku2 : buku_terpinjam){
-                if(buku2.getJudul().equalsIgnoreCase(judul)){
-
-                    System.out.print("Masukkan jumlah kembali: ");
-                    int jumlah = scan.nextInt();
-                    scan.nextLine();
-
-                    if(jumlah > buku2.getStock()){
-                        System.out.println("Melebihi jumlah yang di pinjam");
-                    }else{
-                        for(Latihan_4.Book.Book buku1 : data_buku){
-                            buku1.setStock(buku1.getStock() + jumlah);
-                            buku2.setStock(buku2.getStock() - jumlah);
-
-                            if(buku2.getStock() == 0){
-                                buku_terpinjam.remove(buku2);
-                                return;
-                            }
                         }
                     }
                 }
@@ -168,8 +136,12 @@ public class Student extends User {
         }
     }
 
-    public void logout(){
-        System.out.println("Berhasil keluar, '"+getNama()+"'");
+    public void returnBook() {
+
+    }
+
+    public void logout() {
+        System.out.println("Berhasil keluar, '" + getNama() + "'");
         return;
     }
 }

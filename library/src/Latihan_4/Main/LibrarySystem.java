@@ -2,8 +2,10 @@ package Latihan_4.Main;
 
 import java.util.Scanner;
 
+import Latihan_4.Book.HistoryBook;
 import Latihan_4.Data.Admin;
 import Latihan_4.Data.Student;
+import Latihan_4.Data.User;
 
 public class LibrarySystem {
 
@@ -11,6 +13,8 @@ public class LibrarySystem {
 
     public static void main(String[] args) {
         LibrarySystem main = new LibrarySystem();
+        main.addTempStudent();
+        main.addTempBook();
         main.menu();
     }
 
@@ -64,5 +68,15 @@ public class LibrarySystem {
         Admin admin = new Admin();
 
         admin.isadmin();
+    }
+
+    public void addTempStudent(){
+        Student student = new Student("Ilham Akbar Jamil", "202310370311085", "Teknik", "Informatika");
+        Admin.data_mahasiswa.add(student);
+    }
+
+    public void addTempBook(){
+        HistoryBook history = new HistoryBook("77-12345678", "santet", "Alexander", "History Book", 10);
+        User.data_buku.add(history);
     }
 }
