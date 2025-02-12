@@ -1,18 +1,17 @@
-package Latihan_4.Data;
+package Latihan_5.Data;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import Latihan_4.Book.Book;
 import Latihan_4.Util.iMenu;
+import Latihan_5.IllegalAdminAccess.IllegalAdminAccess;
 
-public class User implements iMenu{
+public class User extends Exception implements iMenu {
 
     public static ArrayList<Book> data_buku = new ArrayList<>();
-<<<<<<< HEAD
-
-=======
->>>>>>> a8d6bbb6a7433e141af20ce47c2529e5bbe4b750
     Scanner scan = new Scanner(System.in);
+    
 
     public void displayBook(){
         System.out.println("Daftar Buku yang tersedia");
@@ -32,7 +31,7 @@ public class User implements iMenu{
     }
 
     @Override
-    public void menu() {
+    public void menu(){
         
     }
 
