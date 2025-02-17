@@ -93,4 +93,4 @@ Jika ada pertanyaan atau ingin berkontribusi, silakan hubungi kami melalui email
 
 ---
 
-**Dibuat oleh [@ilhamakbarjamil8@gmail.com]
+**Dibuat oleh [ilhamakbarjamil8@gmail.com]
